@@ -3,10 +3,10 @@ package com.skilldistillery.jetsproject;
 public abstract class Jet {
 	private String model;
 	private double speed;
-	private double range;
-	private double price;
+	private int range;
+	private long price;
 	
-	public Jet(String model, double speed, double range, double price) {
+	public Jet(String model, double speed, int range, long price) {
 		this.model = model;
 		this.speed = speed;
 		this.range = range;
@@ -51,7 +51,7 @@ public abstract class Jet {
 		return range;
 	}
 
-	public void setRange(double range) {
+	public void setRange(int range) {
 		this.range = range;
 	}
 
@@ -59,7 +59,7 @@ public abstract class Jet {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(long price) {
 		this.price = price;
 	}
 	
