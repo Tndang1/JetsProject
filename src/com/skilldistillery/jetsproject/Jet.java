@@ -13,8 +13,8 @@ public abstract class Jet {
 		this.price = price;
 	}
 	
-	public Jet() {
-	}
+//	public Jet() {
+//	}
 	
 	public void fly() {
 		System.out.println(toString());
