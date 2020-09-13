@@ -20,7 +20,7 @@ public class JetsApplication {
 		airfield = new AirField();
 		boolean run = true;
 		while (run) {
-		displayUserMenu(run);
+		run = displayUserMenu(run);
 		}
 		System.out.println("Good byyyeeeeee");
 	}
@@ -38,30 +38,35 @@ public class JetsApplication {
 		break;
 		case 2:
 //		Fly all jets
+			airfield.flyJets();
 			break;
 		case 3:
 //		View fastest jet
+			airfield.fastestJet();
 			break;
 		case 4:
 //		View jet with longest range
+			airfield.longestRange();
 			break;
 		case 5:
 //		Load all Cargo Jets
+			airfield.loadAllCargo();
 			break;
 		case 6:
 //		Dogfight!
 			break;
 		case 7:
 //		Add a jet to Fleet
-		airfield.addJet();
+		airfield.addJet(scanner);
 		break;
 		case 8:
 //		Remove a jet from Fleet
-		airfield.removeJet();
+		airfield.removeJet(scanner);
 		break;
 		case 9:
 //		Quit
 		run = false;
+		break;
 		default:
 			System.out.println("That was not a valid option");
 		}
@@ -69,4 +74,3 @@ public class JetsApplication {
 	}
 
 }
-
