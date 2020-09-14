@@ -169,4 +169,18 @@ public class AirField {
 			jets.remove(victim);
 		}
 	}
+
+	public void flyAJet(Scanner kb) {
+		listJets();
+		System.out.println("Please enter the model of the plane you would like to remove:");
+		
+		String model = kb.next();
+		
+		for (Jet jet : jets) {
+			if (jet.getModel().toLowerCase().contentEquals(model.toLowerCase())) {
+				jet.fly();
+				break;
+			}
+		}
+	}
 }

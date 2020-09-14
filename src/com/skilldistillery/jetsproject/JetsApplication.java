@@ -42,30 +42,33 @@ public class JetsApplication {
 			airfield.flyJets();
 			break;
 		case 3:
+			airfield.flyAJet(scanner);
+			break;
+		case 4:
 //		View fastest jet
 			airfield.fastestJet();
 			break;
-		case 4:
+		case 5:
 //		View jet with longest range
 			airfield.longestRange();
 			break;
-		case 5:
+		case 6:
 //		Load all Cargo Jets
 			airfield.loadAllCargo();
 			break;
-		case 6:
+		case 7:
 //		Dogfight!
 			airfield.fight();
 			break;
-		case 7:
+		case 8:
 //		Add a jet to Fleet
 		airfield.addJet(scanner);
 		break;
-		case 8:
+		case 9:
 //		Remove a jet from Fleet
 		airfield.removeJet(scanner);
 		break;
-		case 9:
+		case 10:
 //		Quit
 		run = false;
 		break;
