@@ -7,6 +7,7 @@ public class JetsApplication {
 	private AirField airfield;
 	private Scanner scanner = new Scanner(System.in);
 
+
 	public static void main(String[] args) {
 		JetsApplication jetApp = new JetsApplication();
 		jetApp.launch();
@@ -54,6 +55,7 @@ public class JetsApplication {
 			break;
 		case 6:
 //		Dogfight!
+			airfield.fight();
 			break;
 		case 7:
 //		Add a jet to Fleet
