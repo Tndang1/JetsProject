@@ -3,75 +3,71 @@ package com.skilldistillery.jetsproject;
 import java.util.Scanner;
 
 public class JetsApplication {
-	
+
 	private AirField airfield;
 	private Scanner scanner = new Scanner(System.in);
-
 
 	public static void main(String[] args) {
 		JetsApplication jetApp = new JetsApplication();
 		jetApp.launch();
 	}
-	
-	public JetsApplication () {
+
+	public JetsApplication() {
 	}
-	
-	
+
 	private void launch() {
 		airfield = new AirField();
 		boolean run = true;
 		while (run) {
-		run = displayUserMenu(run);
+			run = displayUserMenu(run);
 		}
 		System.out.println("Good byyyeeeeee");
 	}
-	
+
 	private boolean displayUserMenu(boolean run) {
 		System.out.println("Make a selection.");
-		System.out.println("1: List Fleet\n2: Fly All Jets\n3: View Fastest Jet"
-				+ "\n4: View Jet With Longest Range\n5: Load All Cargo Jets\n6: Dogfight!\n7: "
-				+ "Add A Jet To The Fleet\n8: Remove A Jet\n9: Quit");
+		System.out.println("1: List Fleet");
+		System.out.println("2: Fly All Jets");
+		System.out.println("3: Fly A Jet");
+		System.out.println("4: View Fastest Jet");
+		System.out.println("5: View Jet With Longest Range");
+		System.out.println("6: Load All Cargo Jets");
+		System.out.println("7: Dogfight!");
+		System.out.println("8: Add A Jet");
+		System.out.println("9: Remove A Jet");
+		System.out.println("10: Quit");
 		int choice = scanner.nextInt();
-		switch(choice) {
+		switch (choice) {
 		case 1:
-//		List fleet
 			airfield.listJets();
-		break;
+			break;
 		case 2:
-//		Fly all jets
 			airfield.flyJets();
 			break;
 		case 3:
 			airfield.flyAJet(scanner);
 			break;
 		case 4:
-//		View fastest jet
 			airfield.fastestJet();
 			break;
 		case 5:
-//		View jet with longest range
 			airfield.longestRange();
 			break;
 		case 6:
-//		Load all Cargo Jets
 			airfield.loadAllCargo();
 			break;
 		case 7:
-//		Dogfight!
 			airfield.fight();
 			break;
 		case 8:
-//		Add a jet to Fleet
-		airfield.addJet(scanner);
-		break;
+			airfield.addJet(scanner);
+			break;
 		case 9:
-//		Remove a jet from Fleet
-		airfield.removeJet(scanner);
-		break;
+			airfield.removeJet(scanner);
+			break;
 		case 10:
-//		Quit
-		run = false;
-		break;
+			run = false;
+			break;
 		default:
 			System.out.println("That was not a valid option");
 		}
