@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class AirField {
 
-	private List<Jet> jets  = new ArrayList<Jet>();
+	private List<Jet> jets = new ArrayList<Jet>();
 	String line;
 	private boolean firstRun = true;
 
@@ -24,41 +24,43 @@ public class AirField {
 				} else if (fields[0].contentEquals("PaperPlane")) {
 					jet = new PaperPlane(fields[1], Double.parseDouble(fields[2]), Integer.parseInt(fields[3]),
 							Long.parseLong(fields[4]));
+				} else if (fields[0].contentEquals("FighterPlane")) {
+					jet = new FighterPlane(fields[1], Double.parseDouble(fields[2]), Integer.parseInt(fields[3]),
+							Long.parseLong(fields[4]));
 				} else {
 					jet = new JetsImpl(fields[1], Double.parseDouble(fields[2]), Integer.parseInt(fields[3]),
 							Long.parseLong(fields[4]));
 				}
-				jets.add(jet);	
+				jets.add(jet);
 			}
 		} catch (IOException e) {
 			System.err.println(e);
 		}
 	}
-	
+
 	public void fastestJet() {
 		Jet faster = null;
 		double speed = 0;
 		for (Jet jet : jets) {
 			if (jet.getSpeed() > speed) {
-			speed = jet.getSpeed();
-			faster = jet;
+				speed = jet.getSpeed();
+				faster = jet;
 			}
 		}
 		System.out.println("Plane ID " + (jets.indexOf(faster) + 1) + ": " + faster);
-		
 	}
-	
+
 	public void longestRange() {
 		Jet longRange = null;
 		int range = 0;
 		for (Jet jet : jets) {
 			if (jet.getRange() > range) {
-			range = jet.getRange();
-			longRange = jet;
+				range = jet.getRange();
+				longRange = jet;
 			}
 		}
 		System.out.println("Plane ID " + (jets.indexOf(longRange) + 1) + ": " + longRange);
-		
+
 	}
 
 	public void addJet(Scanner kb) {
@@ -87,50 +89,84 @@ public class AirField {
 		}
 		jets.add(add);
 	}
-	
+
 	public void removeJet(Scanner kb) {
 		listJets();
-		System.out.println("Please enter the number of the plane you would like to remove:");
-		jets.remove(kb.nextInt() - 1);
+		System.out.println("Please enter the model of the plane you would like to remove:");
+		
+		String model = kb.next();
+		
+		for (Jet jet : jets) {
+			if (jet.getModel().toLowerCase().contentEquals(model.toLowerCase())) {
+				System.out.println("Grounding " + jet.getModel());
+				jets.remove(jets.indexOf(jet));
+				break;
+			}
+		}
 	}
-	
+
 	public void listJets() {
 		for (Jet jet : jets) {
-			if(jet instanceof PaperPlane && firstRun == true) {
+			if (jet instanceof PaperPlane && firstRun == true) {
 				((PaperPlane) jet).foldPlane();
 			}
 			System.out.println("Plane ID " + (jets.indexOf(jet) + 1) + ": " + jet);
 		}
 		firstRun = false;
 	}
-	
+
 	public void flyJets() {
 		for (Jet jet : jets) {
 			jet.fly();
 		}
 	}
-	
+
 	public void loadAllCargo() {
 		for (Jet jet : jets) {
-			if(jet instanceof CargoPlane) {
+			if (jet instanceof CargoPlane) {
 				((CargoPlane) jet).loadCargo();
 			}
 		}
 	}
-	
-	public void  fight() {
-		System.out.println("A harrier is taking off from a carrier!");
-		int chance = (int)(Math.random() * 10);
-		if (chance % 3 == 0 || jets.size() == 0) {
-			System.out.println("Uh-oh, somebody forgot to get all the cleaning media off of the flight deck!");
-			System.out.println("The harrier engines were destroyed before it could lift-off! Somebody is going to have a baaaad day.");
+
+	public void fight() {
+		Jet attacker = null;
+		boolean hasFighter = false;
+		if (jets.size() > 1) {
+			for (Jet jet : jets) {
+				if (jet instanceof FighterPlane) {
+					hasFighter = true;
+					attacker = jet;
+					boolean success = ((FighterPlane) jet).takeoff();
+					lostJet(attacker, success);
+					break;
+				}
+			}
 		} else {
-			System.out.println("The harrier took off, and is hunting down a plane!");
-			int victim = (int)(Math.random() * jets.size());
-			System.out.println(jets.get(victim) + " is being attacked!");
-			System.out.println(jets.get(victim) + " is going down!");
+			System.out.println("But no one came.");
+			hasFighter = true;
+		}
+		if (hasFighter == false) {
+			System.out.println("There are no fighters in the fleet.");
+		}
+	}
+
+	public void lostJet(Jet attacker, boolean success) {
+		if (success == false) {
+			System.out.println("Uh-oh, somebody forgot to get all the cleaning media off of the flight deck!");
+			System.out.println(attacker.getModel() + " engines were destroyed before it could lift-off!");
+			System.out.println("Somebody is going to have a baaaad day.");
+			jets.remove(jets.indexOf(attacker));
+		} else {
+			System.out.println(attacker.getModel() + " took off, and is hunting down a plane!");
+			int victim = (int) (Math.random() * jets.size());
+			while (victim == jets.indexOf(attacker)) {
+				victim = (int) (Math.random() * jets.size());
+			}
+			Jet down = jets.get(victim);
+			System.out.println(down.getModel() + " is being attacked!");
+			System.out.println(down.getModel() + " is going down!");
 			jets.remove(victim);
 		}
-		
 	}
 }

@@ -1,6 +1,7 @@
 PaperPlane,Origami,4000,50000,99999999999
-Jet,Cessna 172,140,736,3640000
-CargoPlane,Boeing 737,583,30000,90000000
-PaperPlane,Weird Origami,4,1,1
-Jet,Cessna 150,122,350,300000
-CargoPlane,Boeing 787,488,73550,292000000
+Jet,Cessna,140,736,3640000
+CargoPlane,737,583,30000,90000000
+PaperPlane,Paperball,4,1,1
+Jet,Learjet,122,350,300000
+CargoPlane,787,488,73550,292000000
+FighterPlane,Harrier,485,453,25000000
